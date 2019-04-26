@@ -1,0 +1,15 @@
+Package: impoRt
+Type: Package
+Title: Data import with correct naming of samples
+Version: 0.1.0
+Author: Håkon Kaspersen
+Maintainer: Håkon Kaspersen <hakon.kaspersen@vetinst.no>
+Description: Import data into R from text files of the same name in unique subfolders, and give each sample correct names.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.5.0)
+Imports:
+  readr,
+  dplyr
+RoxygenNote: 6.1.1
