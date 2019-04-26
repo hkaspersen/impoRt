@@ -15,19 +15,19 @@ get_data(filepath, pattern, recursive = TRUE, delim = "\\t",
 
 \item{recursive}{Logical, search in sub folders or not?}
 
-\item{delim}{Single character used to separate fields within a record, (see \code{\link[readr]{readr}})}
+\item{delim}{Single character used to separate fields within a record, (see \code{\link[readr]{read_delim}})}
 
-\item{skip_rows}{Ignore blank rows? (see \code{\link[readr]{readr}})}
+\item{skip_rows}{Ignore blank rows? (see \code{\link[readr]{read_delim}})}
 
-\item{progress}{Show progress for data import? (see \code{\link[readr]{readr}})}
+\item{progress}{Show progress for data import? (see \code{\link[readr]{read_delim}})}
 
-\item{trim_ws}{Should leading and trailing whitespace be trimmed? (see \code{\link[readr]{readr}})}
+\item{trim_ws}{Should leading and trailing whitespace be trimmed? (see \code{\link[readr]{read_delim}})}
 
-\item{col_types}{One of NULL, a cols() specification, or a string, (see \code{\link[readr]{readr}})}
+\item{col_types}{One of NULL, a cols() specification, or a string, (see \code{\link[readr]{read_delim}})}
 
-\item{col_names}{Logical, does the data have column names or not? (see \code{\link[readr]{readr}})}
+\item{col_names}{Logical, does the data have column names or not? (see \code{\link[readr]{read_delim}})}
 
-\item{quoted_na}{Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{readr}})}
+\item{quoted_na}{Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{read_delim}})}
 }
 \description{
 Specify file location and import data from multiple files either recursively or directly in the folder. Outputs a data frame with correct folder names for each row.

@@ -5,13 +5,13 @@
 #' @param filepath The path to the files/folders
 #' @param pattern The pattern in the files you want imported
 #' @param recursive Logical, search in sub folders or not?
-#' @param delim Single character used to separate fields within a record, (see \code{\link[readr]{readr}})
-#' @param skip_rows Ignore blank rows? (see \code{\link[readr]{readr}})
-#' @param progress Show progress for data import? (see \code{\link[readr]{readr}})
-#' @param trim_ws Should leading and trailing whitespace be trimmed? (see \code{\link[readr]{readr}})
-#' @param col_types One of NULL, a cols() specification, or a string, (see \code{\link[readr]{readr}})
-#' @param col_names Logical, does the data have column names or not? (see \code{\link[readr]{readr}})
-#' @param quoted_na Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{readr}})
+#' @param delim Single character used to separate fields within a record, (see \code{\link[readr]{read_delim}})
+#' @param skip_rows Ignore blank rows? (see \code{\link[readr]{read_delim}})
+#' @param progress Show progress for data import? (see \code{\link[readr]{read_delim}})
+#' @param trim_ws Should leading and trailing whitespace be trimmed? (see \code{\link[readr]{read_delim}})
+#' @param col_types One of NULL, a cols() specification, or a string, (see \code{\link[readr]{read_delim}})
+#' @param col_names Logical, does the data have column names or not? (see \code{\link[readr]{read_delim}})
+#' @param quoted_na Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{read_delim}})
 #'
 #' @export
 #'
