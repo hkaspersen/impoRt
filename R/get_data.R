@@ -17,8 +17,6 @@
 #'
 #' @importFrom readr read_delim
 #' @importFrom dplyr bind_rows
-#' @importFrom dplyr mutate
-#' @importFrom dplyr %>%
 #'
 get_data <- function(filepath,
                      pattern,
@@ -64,8 +62,8 @@ get_data <- function(filepath,
   }
 
   # Bind to data frame
-  data <- bind_rows(data_list, .id = "ref") %>%
-    mutate(ref = sub("//*.+", "", ref))
+  data <- bind_rows(data_list, .id = "ref")
+  data$ref <- sub("//*.+", "", data$ref)
 
   return(data)
 }
