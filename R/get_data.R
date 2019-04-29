@@ -28,11 +28,13 @@ get_data <- function(filepath,
                      col_types = NULL,
                      col_names = TRUE,
                      quoted_na = TRUE) {
+
   # Identify file names in filepath
   files <- get_file_names(filepath,
                           pattern = pattern,
                           recursive = recursive)
 
+  # Silence progress bar from read_delim
   if (progress == FALSE) {
     options(readr.num_columns = 0)
   }
@@ -63,6 +65,8 @@ get_data <- function(filepath,
 
   # Bind to data frame
   data <- bind_rows(data_list, .id = "ref")
+
+  # Clean names
   data$ref <- sub("//*.+", "", data$ref)
 
   return(data)
