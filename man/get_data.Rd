@@ -6,7 +6,8 @@
 \usage{
 get_data(filepath, pattern, recursive = TRUE, delim = "\\t",
   skip_rows = FALSE, progress = FALSE, trim_ws = FALSE,
-  col_types = NULL, col_names = TRUE, quoted_na = TRUE)
+  col_types = NULL, col_names = TRUE, quoted_na = TRUE,
+  convert = FALSE)
 }
 \arguments{
 \item{filepath}{The path to the files/folders}
@@ -28,6 +29,8 @@ get_data(filepath, pattern, recursive = TRUE, delim = "\\t",
 \item{col_names}{Logical, does the data have column names or not? (see \code{\link[readr]{read_delim}})}
 
 \item{quoted_na}{Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{read_delim}})}
+
+\item{convert}{Should all columns in the resulting data frame be converted to character?}
 }
 \description{
 Specify file location and import data from multiple files either recursively or directly in the folder. Outputs a data frame with correct folder names for each row.

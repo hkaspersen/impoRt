@@ -12,11 +12,13 @@
 #' @param col_types One of NULL, a cols() specification, or a string, (see \code{\link[readr]{read_delim}})
 #' @param col_names Logical, does the data have column names or not? (see \code{\link[readr]{read_delim}})
 #' @param quoted_na Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{read_delim}})
+#' @param convert Should all columns in the resulting data frame be converted to character?
 #'
 #' @export
 #'
 #' @importFrom readr read_delim
 #' @importFrom dplyr bind_rows
+#' @importFrom purrr map
 #'
 get_data <- function(filepath,
                      pattern,
@@ -27,7 +29,8 @@ get_data <- function(filepath,
                      trim_ws = FALSE,
                      col_types = NULL,
                      col_names = TRUE,
-                     quoted_na = TRUE) {
+                     quoted_na = TRUE,
+                     convert = FALSE) {
 
   # Identify file names in filepath
   files <- get_file_names(filepath,
@@ -63,8 +66,16 @@ get_data <- function(filepath,
                          function(x) create_NA_row(x))
   }
 
-  # Bind to data frame
-  data <- bind_rows(data_list, .id = "ref")
+  # Convert columns to character
+  if (convert == TRUE) {
+    data <- bind_rows(lapply(
+      data_list, function(x) map(x, as.character)
+    ), .id = "ref")
+  }
+
+  if (convert == FALSE) {
+    data <- bind_rows(data_list, .id = "ref")
+  }
 
   # Clean names
   data$ref <- sub("//*.+", "", data$ref)
