@@ -13,6 +13,7 @@
 #' @param col_names Logical, does the data have column names or not? (see \code{\link[readr]{read_delim}})
 #' @param quoted_na Should missing values inside quotes be treated as missing values (the default) or strings? (see \code{\link[readr]{read_delim}})
 #' @param convert Should all columns in the resulting data frame be converted to character?
+#' @param df Should the results be converted to a data frame?
 #'
 #' @export
 #'
@@ -30,7 +31,8 @@ get_data <- function(filepath,
                      col_types = NULL,
                      col_names = TRUE,
                      quoted_na = TRUE,
-                     convert = FALSE) {
+                     convert = FALSE,
+                     df = TRUE) {
 
   # Identify file names in filepath
   files <- get_file_names(filepath,
@@ -66,19 +68,25 @@ get_data <- function(filepath,
                          function(x) create_NA_row(x))
   }
 
-  # Convert columns to character
-  if (convert == TRUE) {
-    data <- bind_rows(lapply(
-      data_list, function(x) map(x, as.character)
-    ), .id = "ref")
+  if (df == TRUE) {
+    # Convert columns to character
+    if (convert == TRUE) {
+      data <- bind_rows(lapply(
+        data_list, function(x) map(x, as.character)
+      ), .id = "ref")
+    }
+
+    if (convert == FALSE) {
+      data <- bind_rows(data_list, .id = "ref")
+    }
+
+    # Clean names
+    data$ref <- sub("//*.+", "", data$ref)
+
+    return(data)
   }
 
-  if (convert == FALSE) {
-    data <- bind_rows(data_list, .id = "ref")
+  if (df == FALSE) {
+    return(data_list)
   }
-
-  # Clean names
-  data$ref <- sub("//*.+", "", data$ref)
-
-  return(data)
 }
