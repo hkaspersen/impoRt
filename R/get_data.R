@@ -8,6 +8,7 @@
 #' @param delim Single character used to separate fields within a record, (see \code{\link[readr]{read_delim}})
 #' @param skip_rows Ignore blank rows? (see \code{\link[readr]{read_delim}})
 #' @param progress Show progress for data import? (see \code{\link[readr]{read_delim}})
+#' @param show_col_types List column types? (see \code{\link[readr]{read_delim}})
 #' @param trim_ws Should leading and trailing whitespace be trimmed? (see \code{\link[readr]{read_delim}})
 #' @param col_types One of NULL, a cols() specification, or a string, (see \code{\link[readr]{read_delim}})
 #' @param col_names Logical, does the data have column names or not? (see \code{\link[readr]{read_delim}})
@@ -27,23 +28,24 @@ get_data <- function(filepath,
                      delim = "\t",
                      skip_rows = FALSE,
                      progress = FALSE,
+                     show_col_types = FALSE,
                      trim_ws = FALSE,
                      col_types = NULL,
                      col_names = TRUE,
                      quoted_na = TRUE,
                      convert = FALSE,
                      df = TRUE) {
-
+  
   # Identify file names in filepath
   files <- get_file_names(filepath,
                           pattern = pattern,
                           recursive = recursive)
-
+  
   # Silence progress bar from read_delim
   if (progress == FALSE) {
     options(readr.num_columns = 0)
   }
-
+  
   # Import data
   data_list <- lapply(
     files,
@@ -54,20 +56,21 @@ get_data <- function(filepath,
         trim_ws = trim_ws,
         col_types = col_types,
         col_names = col_names,
-        quoted_na = quoted_na
+        quoted_na = quoted_na,
+        show_col_types = show_col_types
       )
     }
   )
-
+  
   # Set file names in list
   names(data_list) <- files
-
+  
   if (skip_rows == FALSE) {
     # Fill empty data frames with NA
     data_list <- lapply(data_list,
-                         function(x) create_NA_row(x))
+                        function(x) create_NA_row(x))
   }
-
+  
   if (df == TRUE) {
     # Convert columns to character
     if (convert == TRUE) {
@@ -75,17 +78,17 @@ get_data <- function(filepath,
         data_list, function(x) map(x, as.character)
       ), .id = "ref")
     }
-
+    
     if (convert == FALSE) {
       data <- bind_rows(data_list, .id = "ref")
     }
-
+    
     # Clean names
     data$ref <- sub("//*.+", "", data$ref)
-
+    
     return(data)
   }
-
+  
   if (df == FALSE) {
     return(data_list)
   }

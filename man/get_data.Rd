@@ -4,10 +4,21 @@
 \alias{get_data}
 \title{Import data from multiple files}
 \usage{
-get_data(filepath, pattern, recursive = TRUE, delim = "\\t",
-  skip_rows = FALSE, progress = FALSE, trim_ws = FALSE,
-  col_types = NULL, col_names = TRUE, quoted_na = TRUE,
-  convert = FALSE, df = TRUE)
+get_data(
+  filepath,
+  pattern,
+  recursive = TRUE,
+  delim = "\\t",
+  skip_rows = FALSE,
+  progress = FALSE,
+  show_col_types = FALSE,
+  trim_ws = FALSE,
+  col_types = NULL,
+  col_names = TRUE,
+  quoted_na = TRUE,
+  convert = FALSE,
+  df = TRUE
+)
 }
 \arguments{
 \item{filepath}{The path to the files/folders}
@@ -21,6 +32,8 @@ get_data(filepath, pattern, recursive = TRUE, delim = "\\t",
 \item{skip_rows}{Ignore blank rows? (see \code{\link[readr]{read_delim}})}
 
 \item{progress}{Show progress for data import? (see \code{\link[readr]{read_delim}})}
+
+\item{show_col_types}{List column types? (see \code{\link[readr]{read_delim}})}
 
 \item{trim_ws}{Should leading and trailing whitespace be trimmed? (see \code{\link[readr]{read_delim}})}
 
